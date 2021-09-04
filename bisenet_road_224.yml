@@ -1,0 +1,47 @@
+_base_: '../_base_/cityscapes_1024x1024.yml'
+
+train_dataset:
+  type: Cityscapes
+  transforms:
+    - type: RandomPaddingCrop
+      crop_size: [384, 384]
+    - type: RandomHorizontalFlip
+      prob: 0.3
+    - type: Resize
+      target_size: [224,224]
+    - type: Normalize
+  mode: train
+
+val_dataset:
+  type: Cityscapes
+  transforms:
+    - type: Resize
+      target_size: [224,224]
+    - type: Normalize
+  mode: val
+
+model:
+  type: BiSeNetV2
+  num_classes: 2
+
+optimizer:
+  type: sgd
+  weight_decay: 0.0005
+
+loss:
+  types:
+    - type: CrossEntropyLoss
+    - type: CrossEntropyLoss
+    - type: CrossEntropyLoss
+    - type: DiceLoss
+    - type: DiceLoss
+  coef: [1, 1, 1, 1, 1]
+
+batch_size: 8
+iters: 6000
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.01
+  end_lr: 0.0001
+  decay_steps: 0.9
