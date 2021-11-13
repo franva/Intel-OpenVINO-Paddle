@@ -7,4 +7,8 @@
 接下来展示如何把ONNX模型转换到Intel OpenVINO的IR格式.最终会手把手展示如何编译IR模型,使你拥有更小的模型体积.
 最后的最后,教程还会展示如何把这个模型部署到边缘设备上,在此教程里 我们会用到OAK-D相机,它里面集成了Intel的Movidius Myriad X VPU.所以如果你直接用Intel的VPU也会同样管用.
 
-如何转换Paddle模型到Intel OpenVINO格式的文章的链接会在接下来几天更新.
+
+## 相关文章
+1. [Ubuntu20.04环境下使用OpenVINO部署BiSeNetV2模型](https://bizwebcast.intel.cn/dev/articleDetails.html?id=73)
+
+2. [如何使用 OpenVINO™ 部署 PaddleSeg 模型库中的 DeepLabV3+ 模型](https://bizwebcast.intel.cn/dev/articleDetails.html?id=97)
