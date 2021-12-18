@@ -23,7 +23,7 @@ transforms = [
             T.Normalize()
         ]
 
-img_file = r'/media/winstonfan/Workspace/temp/Drishti-GS1_files/Drishti-GS1_files/Test/Images/drishtiGS_087.png'
+img_file = r'drishtiGS_087.png'
 mark_colors = np.array([[0,0,0],[0,255,0]])
 
 img = cv2.imread(img_file)  # (1835, 2049, 3)
