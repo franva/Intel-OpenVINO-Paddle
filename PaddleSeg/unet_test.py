@@ -4,8 +4,8 @@ from openvino.inference_engine import IENetwork, IECore
 import paddleseg.transforms as T
 
 # Please update the pathes to xml and bin files respectively on your machine
-model_xml = r'/media/winstonfan/Workspace/Work/Intel/Models/Paddle/Segmentation/unet/OV/unet.xml'
-model_bin = r'/media/winstonfan/Workspace/Work/Intel/Models/Paddle/Segmentation/unet/OV/unet.bin'
+model_xml = r'/media/Workspace/Work/Intel/Models/Paddle/Segmentation/unet/OV/unet.xml'
+model_bin = r'/media/Workspace/Work/Intel/Models/Paddle/Segmentation/unet/OV/unet.bin'
 
 
 ie = IECore()
@@ -18,10 +18,8 @@ exec_net = ie.load_network(network=net, device_name="CPU")
 
 del net
 
-transforms = [
-            T.Resize(target_size=(128, 128)),
-            T.Normalize()
-        ]
+transforms = [T.Resize(target_size=(128, 128)),
+              T.Normalize()]
 
 img_file = r'drishtiGS_087.png'
 mark_colors = np.array([[0,0,0],[0,255,0]])
