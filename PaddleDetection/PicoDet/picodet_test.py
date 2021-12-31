@@ -8,7 +8,6 @@ import paddleseg.transforms as T
 from tools import draw_box, postprocess
 
 # Please update the pathes to xml and bin files respectively on your machine
-
 path = Path(__file__).parent
 model_xml = str(path / r'model/picodet_s_320_coco.xml')
 model_bin = str(path / r'model/picodet_s_320_coco.bin')
@@ -47,15 +46,12 @@ def detect(img_file):
         img = img_file
     
     raw_shape = img.shape
-
     normalized_img, _ = T.Compose(transforms)(img)
 
     # add an new axis in front
     img_input = normalized_img[np.newaxis, :]
     result = exec_net.infer(inputs={input_blob: img_input})
-
     scores, boxes = squeeze_results(result, score_out_name, boxes_out_name)
-
     return postprocess(scores, boxes, raw_shape)  # bbox, label, score
 
 def detect_folder(img_fold, result_path):
@@ -64,8 +60,7 @@ def detect_folder(img_fold, result_path):
     result_path.mkdir(parents=True, exist_ok=True)
 
     img_name_list = filter(
-        lambda x: str(x).endswith(".png") or str(x).endswith(".jpg"),
-        img_fold.iterdir(), )
+        lambda x: str(x).endswith(".png") or str(x).endswith(".jpg"), img_fold.iterdir())
     img_name_list = list(img_name_list)
 
     print(f"find {len(img_name_list)} images")
@@ -80,5 +75,5 @@ def detect_folder(img_fold, result_path):
         save_path = str(result_path / img_path.name.replace(".png", ".jpg"))
         cv2.imwrite(save_path, img_draw)
 
-folder_path = '/home/winstonfan/Downloads/LANDrop'
+folder_path = '<path to the images that you want to test>'
 detect_folder(folder_path, folder_path + '/results')
