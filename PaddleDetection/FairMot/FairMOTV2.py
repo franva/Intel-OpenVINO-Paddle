@@ -72,9 +72,6 @@ def postprocess(pred_dets, pred_embs, threshold):
             online_scores[cls_id].append(tscore)
     return online_tlwhs, online_scores, online_ids
 
-# postprocess
-online_tlwhs, online_scores, online_ids = postprocess(pred_dets=result[output_names[0]], pred_embs=result[output_names[1]], threshold=0.5)
-
 def get_color(idx):
     idx = idx * 3
     color = ((37 * idx) % 255, (17 * idx) % 255, (29 * idx) % 255)
@@ -189,6 +186,8 @@ def plot_tracking_dict(image,
                         cv2.circle(im, point, 3, (0, 0, 255), -1)
     return im
 
+online_tlwhs, online_scores, online_ids = postprocess(pred_dets=result[output_names[0]], pred_embs=result[output_names[1]], threshold=0.5)
+
 online_im = plot_tracking_dict(
     img,
     1,
@@ -198,10 +197,3 @@ online_im = plot_tracking_dict(
     frame_id=0)
 
 cv2.imshow("wow", online_im)
-# mot predict
-# mot_jde_infer.predict_naive(model_dir, video_file, image_dir, device, threshold, output_dir)
-
-# result[ouput_names[1]].shape
-# (500, 128)
-# result[ouput_names[0]].shape
-# (500, 6)
