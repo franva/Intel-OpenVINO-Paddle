@@ -36,18 +36,6 @@ def predict(exec_net, input):
     result = exec_net.infer(input)
     return result
 
-
-video = "/media/winstonfan/Workspace/Work/MyBuddy/Data/videos/runner.mp4"
-# res = ppdet.engine.Tracker.mot_predict(video_file=video,frame_rate=30,output_dir="./")
-
-net, exec_net = get_net()
-output_names = get_output_names(net)
-del net
-input, img = prepare_input()
-result = predict(exec_net, input)
-
-
-
 def postprocess(pred_dets, pred_embs, threshold):
     tracker = JDETracker()
     tracker.update(pred_dets, pred_embs)
@@ -186,8 +174,15 @@ def plot_tracking_dict(image,
                         cv2.circle(im, point, 3, (0, 0, 255), -1)
     return im
 
-online_tlwhs, online_scores, online_ids = postprocess(pred_dets=result[output_names[0]], pred_embs=result[output_names[1]], threshold=0.5)
 
+net, exec_net = get_net()
+output_names = get_output_names(net)
+del net
+
+input, img = prepare_input()
+result = predict(exec_net, input)
+
+online_tlwhs, online_scores, online_ids = postprocess(pred_dets=result[output_names[0]], pred_embs=result[output_names[1]], threshold=0.5)
 online_im = plot_tracking_dict(
     img,
     1,
