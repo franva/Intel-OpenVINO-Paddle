@@ -1,4 +1,4 @@
-# Please place this code under deploy/pptracking/python/ path
+# Please place this code under deploy/pptracking/python/ in PaddleDetection path
 
 
 from collections import defaultdict, deque
