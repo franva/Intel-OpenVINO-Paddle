@@ -46,7 +46,7 @@ def predict(exec_net, input):
     result = exec_net.infer(input)
     return result
 
-def postprocess(pred_dets, pred_embs):
+def postprocess(pred_dets, pred_embs, threshold = 0.5):
 
     tracker = JDETracker()
 
@@ -54,8 +54,6 @@ def postprocess(pred_dets, pred_embs):
     online_tlwhs = defaultdict(list)
     online_scores = defaultdict(list)
     online_ids = defaultdict(list)
-
-    threshold = 0.5
 
     for cls_id in range(1):
         online_targets = online_targets_dict[cls_id]
