@@ -2,3 +2,5 @@ opencv-python
 numpy
 paddlepaddle
 paddleseg
+sphinx
+sphinx_rtd_theme
